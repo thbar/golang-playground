@@ -1,0 +1,56 @@
+<DOCTYPE! html>
+<html ng-app>
+  <head>
+    <meta charset='UTF-8'>    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+
+    <script src="https://raw.github.com/josscrowcroft/accounting.js/master/accounting.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style>
+      .navbar {
+        margin-top: 10em;
+      }
+      .navbar-inner {
+        padding: 1em 1.5em;
+      }
+    </style>
+  </head>
+  <body ng-controller="ItemCtrl">
+    <div class="container">
+      <div class="span4 offset4">
+        <div class="row">
+          <div class="navbar">
+            <div class="navbar-inner">
+              <a class="brand" href="#">Go serving JSON to Angular.js</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <ul>
+            <li ng-repeat="item in items">
+              {{ item.name }} / {{ formatMoney(item.unit_price) }} per unit / {{ item.available_quantity}} in stock
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function ItemCtrl($scope, $http) {
+        $scope.formatMoney = function(data) {
+          return accounting.formatMoney(data);
+        };
+
+        $http.get('data.json').then(function(res){
+          $scope.items = res.data;
+        });
+      };
+    </script>
+  </body>
+</html>
