@@ -10,3 +10,13 @@ task :hello => 'standalone:connection' do
   require './lib/item'
   puts Item.count
 end
+
+require 'csv'
+task :generate_csv do
+  CSV.open('ruby-data.csv', 'w') do |f|
+    f << [:guid, :some_field, :some_other_field]
+    15000000.times do |counter|
+      f << ["guid_#{counter}", "some_field_#{counter}", "some_other_field_#{counter}"]
+    end
+  end
+end
