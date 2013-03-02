@@ -1,0 +1,9 @@
+source 'https://www.rubygems.org'
+
+gem 'mysql2'
+gem 'activerecord'
+gem 'standalone_migrations'
+
+gem 'rocket_tag', github: 'bradphelan/rocket_tag', ref: 'a47b3340'
+
+gem 'awesome_print'

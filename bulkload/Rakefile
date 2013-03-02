@@ -1,0 +1,12 @@
+require 'bundler'
+require 'active_record'
+require 'awesome_print'
+require 'yaml'
+
+require 'standalone_migrations'
+StandaloneMigrations::Tasks.load_tasks
+
+task :hello => 'standalone:connection' do
+  require './lib/item'
+  puts Item.count
+end
