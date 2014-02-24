@@ -12,10 +12,10 @@ import (
 
 // serve static page for one file manually (but we could do better here)
 func HtmlHandler(response http.ResponseWriter, req *http.Request) {
-	var result, error = ioutil.ReadFile("index.html")
-	if error != nil {
+	var result, err = ioutil.ReadFile("index.html")
+	if err != nil {
 		// one can use http.Error to stop the processing and return an error
-		http.Error(response, error.Error(), http.StatusInternalServerError)
+		http.Error(response, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

@@ -14,23 +14,23 @@ func downloadFromUrl(url string) {
 	fmt.Println("Downloading", url, "to", fileName)
 
 	// TODO: check file existence first with io.IsExist
-	output, error := os.Create(fileName)
-	if error != nil {
-		fmt.Println("Error while creating", fileName, "-", error)
+	output, err := os.Create(fileName)
+	if err != nil {
+		fmt.Println("Error while creating", fileName, "-", err)
 		return
 	}
 	defer output.Close()
 
-	response, error := http.Get(url)
-	if error != nil {
-		fmt.Println("Error while downloading", url, "-", error)
+	response, err := http.Get(url)
+	if err != nil {
+		fmt.Println("Error while downloading", url, "-", err)
 		return
 	}
 	defer response.Body.Close()
 
-	n, error := io.Copy(output, response.Body)
-	if error != nil {
-		fmt.Println("Error while downloading", url, "-", error)
+	n, err := io.Copy(output, response.Body)
+	if err != nil {
+		fmt.Println("Error while downloading", url, "-", err)
 		return
 	}
 

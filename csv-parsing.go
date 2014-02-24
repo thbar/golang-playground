@@ -10,11 +10,11 @@ import (
 // documentation for csv is at http://golang.org/pkg/encoding/csv/
 // TODO: could not find
 func main() {
-	file, error := os.Open("data/sample.csv")
-	if error != nil {
-		// error is printable
+	file, err := os.Open("data/sample.csv")
+	if err != nil {
+		// err is printable
 		// elements passed are separated by space automatically
-		fmt.Println("Error:", error)
+		fmt.Println("Error:", err)
 		return
 	}
 	// automatically call Close() at the end of current method
@@ -27,12 +27,12 @@ func main() {
 	lineCount := 0
 	for {
 		// read just one record, but we could ReadAll() as well
-		record, error := reader.Read()
-		// end-of-file is fitted into error
-		if error == io.EOF {
+		record, err := reader.Read()
+		// end-of-file is fitted into err
+		if err == io.EOF {
 			break
-		} else if error != nil {
-			fmt.Println("Error:", error)
+		} else if err != nil {
+			fmt.Println("Error:", err)
 			return
 		}
 		// record is an array of string so is directly printable
