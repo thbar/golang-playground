@@ -13,7 +13,12 @@ func downloadFromUrl(url string) {
 	fileName := tokens[len(tokens)-1]
 	fmt.Println("Downloading", url, "to", fileName)
 
-	// TODO: check file existence first with io.IsExist
+	_, err := os.Stat(fileName)
+	if err == nil {
+		fmt.Println("Error with file ", fileName, "- file already exists.")
+		return
+	}
+	
 	output, err := os.Create(fileName)
 	if err != nil {
 		fmt.Println("Error while creating", fileName, "-", err)
