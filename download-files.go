@@ -27,6 +27,10 @@ func downloadFromUrl(url string) {
 		return
 	}
 	defer response.Body.Close()
+	if response.StatusCode != 200 {
+		fmt.Println("Unexpected response: ", response.StatusCode)
+		return
+	}	
 
 	n, err := io.Copy(output, response.Body)
 	if err != nil {
